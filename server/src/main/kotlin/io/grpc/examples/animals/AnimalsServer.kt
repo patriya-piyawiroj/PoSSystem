@@ -16,15 +16,16 @@
 
 package io.grpc.examples.animals
 
+import com.google.protobuf.util.Durations
 import io.grpc.Server
 import io.grpc.ServerBuilder
+import io.grpc.examples.routeguide.routeSummary
+import java.util.concurrent.TimeUnit
 
 class AnimalsServer constructor(private val port: Int) {
     val server: Server = ServerBuilder
         .forPort(port)
         .addService(DogService())
-        .addService(PigService())
-        .addService(SheepService())
         .build()
 
     fun start() {
@@ -51,17 +52,11 @@ class AnimalsServer constructor(private val port: Int) {
         override suspend fun bark(request: BarkRequest) = barkReply {
             message = "Bark!"
         }
-    }
-
-    internal class PigService : PigGrpcKt.PigCoroutineImplBase() {
-        override suspend fun oink(request: OinkRequest) = oinkReply {
-            message = "Oink!"
-        }
-    }
-
-    internal class SheepService : SheepGrpcKt.SheepCoroutineImplBase() {
-        override suspend fun baa(request: BaaRequest) = baaReply {
-            message = "Baa!"
+        override suspend fun calculateFinalPriceAndPoints(request: CalculateFinalPriceAndPointsRequest): CalculateFinalPriceAndPointResponse {
+            return calculateFinalPriceAndPointResponse {
+                this.finalPrice = "100"
+                this.points = 1
+            }
         }
     }
 }

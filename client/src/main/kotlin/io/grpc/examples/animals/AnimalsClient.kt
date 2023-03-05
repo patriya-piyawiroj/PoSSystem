@@ -23,24 +23,10 @@ import java.util.concurrent.TimeUnit
 
 class AnimalsClient(private val channel: ManagedChannel) : Closeable {
     private val dogStub: DogGrpcKt.DogCoroutineStub by lazy { DogGrpcKt.DogCoroutineStub(channel) }
-    private val pigStub: PigGrpcKt.PigCoroutineStub by lazy { PigGrpcKt.PigCoroutineStub(channel) }
-    private val sheepStub: SheepGrpcKt.SheepCoroutineStub by lazy { SheepGrpcKt.SheepCoroutineStub(channel) }
 
     suspend fun bark() {
         val request = barkRequest {}
         val response = dogStub.bark(request)
-        println("Received: ${response.message}")
-    }
-
-    suspend fun oink() {
-        val request = oinkRequest {}
-        val response = pigStub.oink(request)
-        println("Received: ${response.message}")
-    }
-
-    suspend fun baa() {
-        val request = baaRequest {}
-        val response = sheepStub.baa(request)
         println("Received: ${response.message}")
     }
 
@@ -69,8 +55,6 @@ suspend fun main(args: Array<String>) {
     args.forEach {
         when (it) {
             "dog" -> client.bark()
-            "pig" -> client.oink()
-            "sheep" -> client.baa()
             else -> {
                 println("Unknown animal type: \"$it\". Try \"dog\", \"pig\" or \"sheep\".")
                 println(usage)

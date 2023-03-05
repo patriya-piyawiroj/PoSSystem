@@ -24,6 +24,31 @@ public final class DogProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_animals_BarkReply_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_animals_DateTimeRangeRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_animals_DateTimeRangeRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_animals_SalesByHourResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_animals_SalesByHourResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_animals_Sales_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_animals_Sales_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_animals_CalculateFinalPriceAndPointsRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_animals_CalculateFinalPriceAndPointsRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_animals_CalculateFinalPriceAndPointResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_animals_CalculateFinalPriceAndPointResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -35,9 +60,24 @@ public final class DogProto {
     java.lang.String[] descriptorData = {
       "\n\"io/grpc/examples/animals/dog.proto\022\007an" +
       "imals\"\r\n\013BarkRequest\"\034\n\tBarkReply\022\017\n\007mes" +
-      "sage\030\001 \001(\t29\n\003Dog\0222\n\004Bark\022\024.animals.Bark" +
-      "Request\032\022.animals.BarkReply\"\000B&\n\030io.grpc" +
-      ".examples.animalsB\010DogProtoP\001b\006proto3"
+      "sage\030\001 \001(\t\":\n\024DateTimeRangeRequest\022\021\n\tst" +
+      "artDate\030\001 \001(\t\022\017\n\007endDate\030\002 \001(\t\"4\n\023SalesB" +
+      "yHourResponse\022\035\n\005sales\030\001 \003(\0132\016.animals.S" +
+      "ales\"8\n\005Sales\022\020\n\010datetime\030\001 \001(\t\022\r\n\005sales" +
+      "\030\002 \001(\t\022\016\n\006points\030\003 \001(\005\"t\n#CalculateFinal" +
+      "PriceAndPointsRequest\022\r\n\005price\030\001 \001(\t\022\025\n\r" +
+      "priceModifier\030\002 \001(\002\022\025\n\rpaymentMethod\030\003 \001" +
+      "(\t\022\020\n\010datetime\030\004 \001(\t\"I\n#CalculateFinalPr" +
+      "iceAndPointResponse\022\022\n\nfinalPrice\030\001 \001(\t\022" +
+      "\016\n\006points\030\002 \001(\0052\210\002\n\003Dog\022|\n\034CalculateFina" +
+      "lPriceAndPoints\022,.animals.CalculateFinal" +
+      "PriceAndPointsRequest\032,.animals.Calculat" +
+      "eFinalPriceAndPointResponse\"\000\022O\n\016GetSale" +
+      "sByHour\022\035.animals.DateTimeRangeRequest\032\034" +
+      ".animals.SalesByHourResponse\"\000\0222\n\004Bark\022\024" +
+      ".animals.BarkRequest\032\022.animals.BarkReply" +
+      "\"\000B&\n\030io.grpc.examples.animalsB\010DogProto" +
+      "P\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -55,6 +95,36 @@ public final class DogProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_animals_BarkReply_descriptor,
         new java.lang.String[] { "Message", });
+    internal_static_animals_DateTimeRangeRequest_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_animals_DateTimeRangeRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_animals_DateTimeRangeRequest_descriptor,
+        new java.lang.String[] { "StartDate", "EndDate", });
+    internal_static_animals_SalesByHourResponse_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_animals_SalesByHourResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_animals_SalesByHourResponse_descriptor,
+        new java.lang.String[] { "Sales", });
+    internal_static_animals_Sales_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_animals_Sales_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_animals_Sales_descriptor,
+        new java.lang.String[] { "Datetime", "Sales", "Points", });
+    internal_static_animals_CalculateFinalPriceAndPointsRequest_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_animals_CalculateFinalPriceAndPointsRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_animals_CalculateFinalPriceAndPointsRequest_descriptor,
+        new java.lang.String[] { "Price", "PriceModifier", "PaymentMethod", "Datetime", });
+    internal_static_animals_CalculateFinalPriceAndPointResponse_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_animals_CalculateFinalPriceAndPointResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_animals_CalculateFinalPriceAndPointResponse_descriptor,
+        new java.lang.String[] { "FinalPrice", "Points", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

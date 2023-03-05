@@ -15,6 +15,68 @@ public final class DogGrpc {
   public static final String SERVICE_NAME = "animals.Dog";
 
   // Static method descriptors that strictly reflect the proto.
+  private static volatile io.grpc.MethodDescriptor<io.grpc.examples.animals.CalculateFinalPriceAndPointsRequest,
+      io.grpc.examples.animals.CalculateFinalPriceAndPointResponse> getCalculateFinalPriceAndPointsMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "CalculateFinalPriceAndPoints",
+      requestType = io.grpc.examples.animals.CalculateFinalPriceAndPointsRequest.class,
+      responseType = io.grpc.examples.animals.CalculateFinalPriceAndPointResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<io.grpc.examples.animals.CalculateFinalPriceAndPointsRequest,
+      io.grpc.examples.animals.CalculateFinalPriceAndPointResponse> getCalculateFinalPriceAndPointsMethod() {
+    io.grpc.MethodDescriptor<io.grpc.examples.animals.CalculateFinalPriceAndPointsRequest, io.grpc.examples.animals.CalculateFinalPriceAndPointResponse> getCalculateFinalPriceAndPointsMethod;
+    if ((getCalculateFinalPriceAndPointsMethod = DogGrpc.getCalculateFinalPriceAndPointsMethod) == null) {
+      synchronized (DogGrpc.class) {
+        if ((getCalculateFinalPriceAndPointsMethod = DogGrpc.getCalculateFinalPriceAndPointsMethod) == null) {
+          DogGrpc.getCalculateFinalPriceAndPointsMethod = getCalculateFinalPriceAndPointsMethod =
+              io.grpc.MethodDescriptor.<io.grpc.examples.animals.CalculateFinalPriceAndPointsRequest, io.grpc.examples.animals.CalculateFinalPriceAndPointResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "CalculateFinalPriceAndPoints"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  io.grpc.examples.animals.CalculateFinalPriceAndPointsRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  io.grpc.examples.animals.CalculateFinalPriceAndPointResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DogMethodDescriptorSupplier("CalculateFinalPriceAndPoints"))
+              .build();
+        }
+      }
+    }
+    return getCalculateFinalPriceAndPointsMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<io.grpc.examples.animals.DateTimeRangeRequest,
+      io.grpc.examples.animals.SalesByHourResponse> getGetSalesByHourMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetSalesByHour",
+      requestType = io.grpc.examples.animals.DateTimeRangeRequest.class,
+      responseType = io.grpc.examples.animals.SalesByHourResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<io.grpc.examples.animals.DateTimeRangeRequest,
+      io.grpc.examples.animals.SalesByHourResponse> getGetSalesByHourMethod() {
+    io.grpc.MethodDescriptor<io.grpc.examples.animals.DateTimeRangeRequest, io.grpc.examples.animals.SalesByHourResponse> getGetSalesByHourMethod;
+    if ((getGetSalesByHourMethod = DogGrpc.getGetSalesByHourMethod) == null) {
+      synchronized (DogGrpc.class) {
+        if ((getGetSalesByHourMethod = DogGrpc.getGetSalesByHourMethod) == null) {
+          DogGrpc.getGetSalesByHourMethod = getGetSalesByHourMethod =
+              io.grpc.MethodDescriptor.<io.grpc.examples.animals.DateTimeRangeRequest, io.grpc.examples.animals.SalesByHourResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetSalesByHour"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  io.grpc.examples.animals.DateTimeRangeRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  io.grpc.examples.animals.SalesByHourResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new DogMethodDescriptorSupplier("GetSalesByHour"))
+              .build();
+        }
+      }
+    }
+    return getGetSalesByHourMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<io.grpc.examples.animals.BarkRequest,
       io.grpc.examples.animals.BarkReply> getBarkMethod;
 
@@ -95,6 +157,26 @@ public final class DogGrpc {
   public static abstract class DogImplBase implements io.grpc.BindableService {
 
     /**
+     * <pre>
+     * Calculate final price and point given payment type and modifier
+     * </pre>
+     */
+    public void calculateFinalPriceAndPoints(io.grpc.examples.animals.CalculateFinalPriceAndPointsRequest request,
+        io.grpc.stub.StreamObserver<io.grpc.examples.animals.CalculateFinalPriceAndPointResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCalculateFinalPriceAndPointsMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Get aggregated sales price and point per hour
+     * </pre>
+     */
+    public void getSalesByHour(io.grpc.examples.animals.DateTimeRangeRequest request,
+        io.grpc.stub.StreamObserver<io.grpc.examples.animals.SalesByHourResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetSalesByHourMethod(), responseObserver);
+    }
+
+    /**
      */
     public void bark(io.grpc.examples.animals.BarkRequest request,
         io.grpc.stub.StreamObserver<io.grpc.examples.animals.BarkReply> responseObserver) {
@@ -103,6 +185,20 @@ public final class DogGrpc {
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
+          .addMethod(
+            getCalculateFinalPriceAndPointsMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                io.grpc.examples.animals.CalculateFinalPriceAndPointsRequest,
+                io.grpc.examples.animals.CalculateFinalPriceAndPointResponse>(
+                  this, METHODID_CALCULATE_FINAL_PRICE_AND_POINTS)))
+          .addMethod(
+            getGetSalesByHourMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                io.grpc.examples.animals.DateTimeRangeRequest,
+                io.grpc.examples.animals.SalesByHourResponse>(
+                  this, METHODID_GET_SALES_BY_HOUR)))
           .addMethod(
             getBarkMethod(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -129,6 +225,28 @@ public final class DogGrpc {
     }
 
     /**
+     * <pre>
+     * Calculate final price and point given payment type and modifier
+     * </pre>
+     */
+    public void calculateFinalPriceAndPoints(io.grpc.examples.animals.CalculateFinalPriceAndPointsRequest request,
+        io.grpc.stub.StreamObserver<io.grpc.examples.animals.CalculateFinalPriceAndPointResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getCalculateFinalPriceAndPointsMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Get aggregated sales price and point per hour
+     * </pre>
+     */
+    public void getSalesByHour(io.grpc.examples.animals.DateTimeRangeRequest request,
+        io.grpc.stub.StreamObserver<io.grpc.examples.animals.SalesByHourResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetSalesByHourMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
      */
     public void bark(io.grpc.examples.animals.BarkRequest request,
         io.grpc.stub.StreamObserver<io.grpc.examples.animals.BarkReply> responseObserver) {
@@ -149,6 +267,26 @@ public final class DogGrpc {
     protected DogBlockingStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new DogBlockingStub(channel, callOptions);
+    }
+
+    /**
+     * <pre>
+     * Calculate final price and point given payment type and modifier
+     * </pre>
+     */
+    public io.grpc.examples.animals.CalculateFinalPriceAndPointResponse calculateFinalPriceAndPoints(io.grpc.examples.animals.CalculateFinalPriceAndPointsRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getCalculateFinalPriceAndPointsMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Get aggregated sales price and point per hour
+     * </pre>
+     */
+    public io.grpc.examples.animals.SalesByHourResponse getSalesByHour(io.grpc.examples.animals.DateTimeRangeRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetSalesByHourMethod(), getCallOptions(), request);
     }
 
     /**
@@ -174,6 +312,28 @@ public final class DogGrpc {
     }
 
     /**
+     * <pre>
+     * Calculate final price and point given payment type and modifier
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<io.grpc.examples.animals.CalculateFinalPriceAndPointResponse> calculateFinalPriceAndPoints(
+        io.grpc.examples.animals.CalculateFinalPriceAndPointsRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getCalculateFinalPriceAndPointsMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * Get aggregated sales price and point per hour
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<io.grpc.examples.animals.SalesByHourResponse> getSalesByHour(
+        io.grpc.examples.animals.DateTimeRangeRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetSalesByHourMethod(), getCallOptions()), request);
+    }
+
+    /**
      */
     public com.google.common.util.concurrent.ListenableFuture<io.grpc.examples.animals.BarkReply> bark(
         io.grpc.examples.animals.BarkRequest request) {
@@ -182,7 +342,9 @@ public final class DogGrpc {
     }
   }
 
-  private static final int METHODID_BARK = 0;
+  private static final int METHODID_CALCULATE_FINAL_PRICE_AND_POINTS = 0;
+  private static final int METHODID_GET_SALES_BY_HOUR = 1;
+  private static final int METHODID_BARK = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -201,6 +363,14 @@ public final class DogGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_CALCULATE_FINAL_PRICE_AND_POINTS:
+          serviceImpl.calculateFinalPriceAndPoints((io.grpc.examples.animals.CalculateFinalPriceAndPointsRequest) request,
+              (io.grpc.stub.StreamObserver<io.grpc.examples.animals.CalculateFinalPriceAndPointResponse>) responseObserver);
+          break;
+        case METHODID_GET_SALES_BY_HOUR:
+          serviceImpl.getSalesByHour((io.grpc.examples.animals.DateTimeRangeRequest) request,
+              (io.grpc.stub.StreamObserver<io.grpc.examples.animals.SalesByHourResponse>) responseObserver);
+          break;
         case METHODID_BARK:
           serviceImpl.bark((io.grpc.examples.animals.BarkRequest) request,
               (io.grpc.stub.StreamObserver<io.grpc.examples.animals.BarkReply>) responseObserver);
@@ -266,6 +436,8 @@ public final class DogGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new DogFileDescriptorSupplier())
+              .addMethod(getCalculateFinalPriceAndPointsMethod())
+              .addMethod(getGetSalesByHourMethod())
               .addMethod(getBarkMethod())
               .build();
         }
