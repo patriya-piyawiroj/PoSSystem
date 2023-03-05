@@ -15,6 +15,8 @@ dependencies {
 
     testImplementation(kotlin("test-junit"))
     testImplementation("io.grpc:grpc-testing:${rootProject.ext["grpcVersion"]}")
+    implementation("org.postgresql:postgresql:42.3.1")
+
 }
 
 tasks.register<JavaExec>("HelloWorldServer") {

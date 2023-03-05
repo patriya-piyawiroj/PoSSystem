@@ -16,11 +16,8 @@
 
 package io.grpc.examples.animals
 
-import com.google.protobuf.util.Durations
 import io.grpc.Server
 import io.grpc.ServerBuilder
-import io.grpc.examples.routeguide.routeSummary
-import java.util.concurrent.TimeUnit
 
 class AnimalsServer constructor(private val port: Int) {
     val server: Server = ServerBuilder

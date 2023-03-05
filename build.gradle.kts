@@ -5,7 +5,6 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
 }
 
-// todo: move to subprojects, but how?
 ext["grpcVersion"] = "1.47.0"
 ext["grpcKotlinVersion"] = "1.3.0" // CURRENT_GRPC_KOTLIN_VERSION
 ext["protobufVersion"] = "3.21.2"
