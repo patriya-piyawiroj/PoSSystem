@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "payment";
+option java_outer_classname = "PaymentProto";
+
+package payment;
+
+service Payment {
+  // Calculate final price and point given payment type and modifier
+  rpc ConfirmPaymentMethod (ConfirmPaymentMethodRequest) returns (ConfirmPaymentMethodResponse) {}
+  // Get aggregated sales price and point per hour
+  rpc GetSalesByHour (DateTimeRangeRequest) returns (TotalSalesResponse) {}
+}
+
+  // The request message with a start and end date filter
+  message DateTimeRangeRequest {
+    string startDateTime = 1;
+    string endDateTime = 2;
+  }
+
+  // The response message containing a list of sales
+  message TotalSalesResponse {
+    repeated TotalSales sales = 1;
+  }
+  message TotalSales {
+    string datetime = 1;
+    string sales = 2;
+    int32 points = 3;
+  }
+
+  // The request message for calculating final price and points
+  message ConfirmPaymentMethodRequest {
+    string price = 1;
+    float priceModifier = 2;
+    string paymentMethod = 3;
+    string datetime = 4;
+  }
+
+  // The response message containing final price and points
+  message ConfirmPaymentMethodResponse {
+    string finalPrice = 1;
+    int32 points = 2;
+  }

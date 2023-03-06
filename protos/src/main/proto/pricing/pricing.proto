@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "pricing";
+option java_outer_classname = "PricingProto";
+
+package pricing;
+
+service Pricing {
+  // Calculate final price and point given payment type and modifier
+  rpc CalculateFinalPriceAndPoints (CalculateFinalPriceAndPointsRequest) returns (CalculateFinalPriceAndPointResponse) {}
+}
+
+// The request message for calculating final price and points
+message CalculateFinalPriceAndPointsRequest {
+  float price = 1;
+  float priceModifier = 2;
+  string paymentMethod = 3;
+}
+
+// The response message containing final price and points
+message CalculateFinalPriceAndPointResponse {
+  float finalPrice = 1;
+  int32 points = 2;
+}

@@ -1,5 +1,18 @@
 # gRPC Kotlin examples
 
+TODO:
+- Put pool sizing and configurations in DB docs and config file
+- Describe dependencies and frameowkrs
+- Try to validate the fields in request response
+- Load balancing https://www.vinsguru.com/grpc-load-balancing-with-nginx/
+- Log errors
+- Migrate to Spring for Db management https://kotlinlang.org/docs/jvm-spring-boot-using-crudrepository.html
+- Request validators
+- Load setting from application.yaml
+- Pass connection in as a string to service
+- Stackdriver logging + Confluence documentation + Swagger docs
+- Unit tests
+
 ## Examples
 
 This directory contains several Kotlin gRPC examples. You can find detailed
