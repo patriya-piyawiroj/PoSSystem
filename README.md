@@ -11,7 +11,7 @@ TODO:
 - Load setting from application.yaml
 - Pass connection in as a string to service
 - Stackdriver logging + Confluence documentation + Swagger docs
-- Unit tests
+- Application configs
 
 ## Examples
 

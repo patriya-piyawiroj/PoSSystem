@@ -19,16 +19,19 @@ package payment.server
 import io.grpc.ManagedChannelBuilder
 import io.grpc.Server
 import io.grpc.ServerBuilder
+import payment.dao.PaymentMethodDao
+import payment.dao.SaleDao
+import payment.repository.PaymentMethodRepo
+import payment.repository.SaleRepo
 import payment.service.PaymentService
-import payment.service.PricingService
 
 class PaymentServer constructor(private val port: Int) {
-    var channel = ManagedChannelBuilder.forAddress("localhost", port).usePlaintext().build()
 
+    private val saleRepo: SaleDao = SaleRepo()
+    private val paymentMethodRepo: PaymentMethodDao = PaymentMethodRepo()
     private val server: Server = ServerBuilder
         .forPort(port)
-        .addService(PaymentService(channel))
-        .addService(PricingService())
+        .addService(PaymentService(saleRepo, paymentMethodRepo))
         .build()
 
     fun start() {

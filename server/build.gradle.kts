@@ -1,6 +1,7 @@
 plugins {
     application
     kotlin("jvm")
+    id("org.jetbrains.kotlinx.kover") version "0.4.2"
 }
 
 java {
@@ -12,12 +13,15 @@ java {
 dependencies {
     implementation(project(":stub"))
     runtimeOnly("io.grpc:grpc-netty:${rootProject.ext["grpcVersion"]}")
-    testImplementation(kotlin("test-junit"))
-    testImplementation("io.grpc:grpc-testing:${rootProject.ext["grpcVersion"]}")
 
     // Postgres
     implementation("org.postgresql:postgresql:42.3.1")
     implementation("com.zaxxer:HikariCP:5.0.0")
+
+    // Testing
+    testImplementation(kotlin("test-junit"))
+    testImplementation("io.grpc:grpc-testing:${rootProject.ext["grpcVersion"]}")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
 }
 
 tasks.register<JavaExec>("PaymentServer") {

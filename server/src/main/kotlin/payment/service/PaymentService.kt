@@ -4,18 +4,22 @@ import io.grpc.ManagedChannel
 import io.grpc.Status
 import io.grpc.StatusException
 import payment.*
+import payment.dao.PaymentMethodDao
 import payment.dao.SaleDao
+import payment.dto.PaymentMethod
+import payment.repository.PaymentMethodRepo
 import payment.repository.SaleRepo
 import payment.utils.localDateTimeToString
 import payment.utils.stringToLocalDateTime
-import pricing.PricingGrpcKt
-import pricing.calculateFinalPriceAndPointsRequest
 import java.time.LocalDateTime
 
-class PaymentService(channel: ManagedChannel) : PaymentGrpcKt.PaymentCoroutineImplBase() {
+class PaymentService(saleRepo: SaleDao, paymentMethodRepo: PaymentMethodDao) : PaymentGrpcKt.PaymentCoroutineImplBase() {
 
-    private val pricingServiceStub: PricingGrpcKt.PricingCoroutineStub = PricingGrpcKt.PricingCoroutineStub(channel)
-    private var saleRepo: SaleDao = SaleRepo()
+    private var saleRepo: SaleDao = saleRepo
+    private var paymentMethodRepo: PaymentMethodDao = paymentMethodRepo
+    private fun isValidPriceMod(paymentMethod: PaymentMethod, priceMod: Float): Boolean {
+        return priceMod in paymentMethod.priceModMin..paymentMethod.priceModMax
+    }
 
     override suspend fun getSalesByHour(request: DateTimeRangeRequest): TotalSalesResponse = totalSalesResponse {
         // Validate request
@@ -41,7 +45,7 @@ class PaymentService(channel: ManagedChannel) : PaymentGrpcKt.PaymentCoroutineIm
         }
     }
 
-    override suspend fun confirmPaymentMethod(request: ConfirmPaymentMethodRequest): ConfirmPaymentMethodResponse {
+    override suspend fun makePayment(request: MakePaymentRequest): MakePaymentResponse {
         // Validate request
         var price: Float?
         var dateTime: LocalDateTime?
@@ -53,18 +57,24 @@ class PaymentService(channel: ManagedChannel) : PaymentGrpcKt.PaymentCoroutineIm
         }
 
         // Validate price modifier and calculate final price
-        val calculatePriceRequest = calculateFinalPriceAndPointsRequest {
-            this.paymentMethod = request.paymentMethod
-            this.price = price
-            this.priceModifier = request.priceModifier
+        val paymentMethod = paymentMethodRepo.getByName(request.paymentMethod)
+        if (!isValidPriceMod(paymentMethod, request.priceModifier)) {
+            val errorDescription = String.format(
+                "Invalid price multiplier: %s payment is set to accept multipliers between %.2f and %.2f",
+                paymentMethod.paymentMethod,
+                paymentMethod.priceModMin,
+                paymentMethod.priceModMax
+            )
+            throw StatusException(Status.FAILED_PRECONDITION.withDescription(errorDescription))
         }
-        val finalPriceAndPoints = pricingServiceStub.calculateFinalPriceAndPoints(calculatePriceRequest)
+        val finalPrice = price * request.priceModifier
+        val finalPoints = (price * paymentMethod.pointMultiplier).toInt()
 
         // Save payment to DB
-        saleRepo.createSale(finalPriceAndPoints.finalPrice, finalPriceAndPoints.points, request.paymentMethod, dateTime)
-        return confirmPaymentMethodResponse {
-            this.finalPrice = finalPriceAndPoints.finalPrice.toString()
-            this.points = finalPriceAndPoints.points
+        saleRepo.createSale(finalPrice, finalPoints, request.paymentMethod, dateTime)
+        return makePaymentResponse {
+            this.finalPrice = finalPrice.toString()
+            this.points = points
         }
     }
 }

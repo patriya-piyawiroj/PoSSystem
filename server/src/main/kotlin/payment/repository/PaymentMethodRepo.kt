@@ -23,7 +23,6 @@ class PaymentMethodRepo : PaymentMethodDao {
             val query = connection.prepareStatement("SELECT * FROM payment_method WHERE name='$name'")
             val result = query.executeQuery()
             while (result.next()) {
-                // TODO: Add mapping function from result to PaymentMethod object
                 return PaymentMethod(
                     result.getString("name"),
                     result.getFloat("price_modifier_max"),

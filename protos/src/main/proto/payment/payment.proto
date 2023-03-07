@@ -8,7 +8,7 @@ package payment;
 
 service Payment {
   // Calculate final price and point given payment type and modifier
-  rpc ConfirmPaymentMethod (ConfirmPaymentMethodRequest) returns (ConfirmPaymentMethodResponse) {}
+  rpc MakePayment (MakePaymentRequest) returns (MakePaymentResponse) {}
   // Get aggregated sales price and point per hour
   rpc GetSalesByHour (DateTimeRangeRequest) returns (TotalSalesResponse) {}
 }
@@ -30,7 +30,7 @@ service Payment {
   }
 
   // The request message for calculating final price and points
-  message ConfirmPaymentMethodRequest {
+  message MakePaymentRequest {
     string price = 1;
     float priceModifier = 2;
     string paymentMethod = 3;
@@ -38,7 +38,7 @@ service Payment {
   }
 
   // The response message containing final price and points
-  message ConfirmPaymentMethodResponse {
+  message MakePaymentResponse {
     string finalPrice = 1;
     int32 points = 2;
   }
