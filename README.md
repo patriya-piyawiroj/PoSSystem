@@ -34,7 +34,7 @@ Or download a gRPC Client such as Ezy and import the proto files at [protos/src/
 
 
 ## Sub-directories 
-### Project
+#### Project
 ```agsl
 ├── PoSSystem
     ├── data         # database seed data
@@ -42,10 +42,10 @@ Or download a gRPC Client such as Ezy and import the proto files at [protos/src/
     ├── protos       # proto definitions
     ├── scripts      # startup scripts, including database creation
     ├── server       # gRPC payment service server
-    ├── stub         # generated gRPC method stubs
+    └──  stub         # generated gRPC method stubs
 ```
 
-### server
+#### server
 ```agsl
 ├── payment
     ├── config          # application configurations

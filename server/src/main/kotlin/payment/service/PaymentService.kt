@@ -69,7 +69,7 @@ class PaymentService(saleRepo: SaleDao, paymentMethodRepo: PaymentMethodDao) : P
         saleRepo.createSale(finalPrice, finalPoints, request.paymentMethod, dateTime)
         return makePaymentResponse {
             this.finalPrice = finalPrice.toString()
-            this.points = points
+            this.points = finalPoints
         }
     }
 }
