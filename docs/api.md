@@ -74,8 +74,23 @@ Gets sales aggregated by hour
 
 ```agsl
 {
-  "finalPrice": "95.0",
-  "points": 5
+  "sales": [
+    {
+      "datetime": "2022-08-31T17:00Z",
+      "sales": "190.0",
+      "points": 6
+    },
+    {
+      "datetime": "2022-08-31T18:00Z",
+      "sales": "190.0",
+      "points": 6
+    },
+    {
+      "datetime": "2022-08-31T20:00Z",
+      "sales": "95.0",
+      "points": 3
+    }
+  ]
 }
 ```
 </details>
