@@ -29,7 +29,8 @@ Calculate price and points for a given payment method and saves result to databa
 <details closed>
 <summary>Flow Diagram</summary>
 
-![Screen Shot 2566-03-09 at 01.22.28.png](..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2F8m%2Ft967p_yn57q33pgh9l66yhb40000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_w3pAhO%2FScreen%20Shot%202566-03-09%20at%2001.22.28.png)
+<img width="660" alt="Screen Shot 2566-03-09 at 01 53 17" src="https://user-images.githubusercontent.com/33531627/223808660-4f633a99-ef1e-46a2-8f1b-cd234653d8ff.png">
+
 </details>
 
 <details closed>
@@ -82,7 +83,7 @@ Gets sales aggregated by hour
 <details closed>
 <summary>Flow Diagram</summary>
 
-![Screen Shot 2566-03-09 at 01.31.31.png](..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2F8m%2Ft967p_yn57q33pgh9l66yhb40000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_ShU9dW%2FScreen%20Shot%202566-03-09%20at%2001.31.31.png)
+<img width="655" alt="Screen Shot 2566-03-09 at 01 53 25" src="https://user-images.githubusercontent.com/33531627/223808707-18875155-76c6-4295-ab84-3c5d2c364448.png">
 </details>
 
 <details closed>
