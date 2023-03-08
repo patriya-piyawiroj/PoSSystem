@@ -1,67 +1,58 @@
-# gRPC Kotlin examples
+# E-commerce PoS System
+A Kotlin gRPC PoS backend system for making payments. 
 
-TODO:
-- Put pool sizing and configurations in DB docs and config file
-- Describe dependencies and frameowkrs
-- Try to validate the fields in request response
-- Load balancing https://www.vinsguru.com/grpc-load-balancing-with-nginx/
-- Log errors
-- Migrate to Spring for Db management https://kotlinlang.org/docs/jvm-spring-boot-using-crudrepository.html
-- Request validators
-- Load setting from application.yaml
-- Pass connection in as a string to service
-- Stackdriver logging + Confluence documentation + Swagger docs
-- Application configs
+## Quickstart
 
-## Examples
-
-This directory contains several Kotlin gRPC examples. You can find detailed
-instructions for building and running the two main examples from the [grpc.io
-Kotlin/JVM][] pages:
-
-- **Greeter** ("hello world"): for details, see [Quick start][].
-- **Route guide**: for details, see [Basics tutorial][]
-
-Instructions for the remaining examples are provided below.
-
-## File organization
-
-The example sources are organized into the following top-level folders:
-
-- [protos][]: `.proto` files (shared across examples)
-- [stub][]: regular Java & Kotlin stub artifacts from [protos][]
-- [stub-lite][]: lite Java & Kotlin stub artifacts from [protos][]
-- [stub-android][]: Android-compatible Java & Kotlin stub artifacts from [protos][]
-- [client](client): Kotlin clients based on regular [stub][] artifacts
-- [server](server): Kotlin servers based on regular [stub][] artifacts
-- [native-client](native-client) : GraalVM Native Image clients based [stub-lite][]
-- [android](android): Kotlin Android app based on [stub-android][]
-
-## Instructions for running other examples
-
-- <details>
-  <summary>Multiple-services animals example</summary>
-
-  Start the server:
+### Start Postgres database
 
   ```sh
-  ./gradlew :server:AnimalsServer
+  docker-compose up
   ```
+By default, the server will be started on localhost:5432. However, this can be configured in [docker-compose.yml](/docker-compose.yml)
 
-  In another console, run the client against the "dog", "pig", and "sheep" services:
+Database configuration details can be found under [docs/database.md](docs/database.md)
 
+### Run Server
   ```sh
-  ./gradlew :client:AnimalsClient --args=dog
-  ./gradlew :client:AnimalsClient --args=pig
-  ./gradlew :client:AnimalsClient --args=sheep
+  ./gradlew :server:PaymentServer
   ```
-  </details>
-  
+Payment server will start on localhost:50051. This is configurable in [config/application.yaml](/server/src/main/kotlin/payment/config/application.yaml) 
 
-[Basics tutorial]: https://grpc.io/docs/languages/kotlin/basics/
-[grpc.io Kotlin/JVM]: https://grpc.io/docs/languages/kotlin/
-[protos]: protos
-[Quick start]: https://grpc.io/docs/languages/kotlin/quickstart/
-[stub]: stub
-[stub-android]: stub-android
-[stub-lite]: stub-lite
+API descriptions can be found at [docs/api.md](docs/api.md)
+
+### Test
+To run unit tests and output coverage [build/report/kover/html/index.html](/server/build/report/kover/html/index.html):
+
+ ```sh
+  ./gradlew :server:koverHtmlReport
+  ```
+
+Or download a gRPC Client such as Ezy and import the proto files at [protos/src/main/proto](protos/src/main/proto/payment/payment.proto):
+
+![Screen Shot 2566-03-09 at 00.06.24.png](..%2F..%2FDesktop%2FScreen%20Shot%202566-03-09%20at%2000.06.24.png)
+
+
+
+## Sub-directories 
+### Project
+```agsl
+├── PoSSystem
+    ├── data         # database seed data
+    ├── docs         # detailed documentation
+    ├── protos       # proto definitions
+    ├── scripts      # startup scripts, including database creation
+    ├── server       # gRPC payment service server
+    ├── stub         # generated gRPC method stubs
+```
+
+### server
+```agsl
+├── payment
+    ├── config          # application configurations
+    ├── dao             # interface for accessing repository
+    ├── dto             # data models
+    ├── repository      # Postgres repository implementations
+    ├── server          # where the main application is run
+    ├── service         # gRPC service implementatinos
+    └── utils           # utitlity function include time convertors
+```

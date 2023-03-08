@@ -1,0 +1,9 @@
+port: 50051
+db:
+  hostUrl: localhost
+  driver: postgresql
+  name: pos
+  port: 5432
+  username: admin
+  password: admin
+  poolSize: 10

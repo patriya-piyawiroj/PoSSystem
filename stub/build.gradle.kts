@@ -36,15 +36,6 @@ java {
     }
 }
 
-tasks.named("runKtlintCheckOverMainSourceSet").configure { dependsOn("generateProto") }
-configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
-    filter {
-        exclude {
-            it.file.path.contains("$buildDir/generated/")
-        }
-    }
-}
-
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
     kotlinOptions {
         freeCompilerArgs = listOf("-opt-in=kotlin.RequiresOptIn")

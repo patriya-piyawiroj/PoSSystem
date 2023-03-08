@@ -53,14 +53,16 @@ class PaymentServiceTest {
             grpcServerRule.serviceRegistry.addService(paymentService)
 
             val paymentStub = PaymentGrpcKt.PaymentCoroutineStub(grpcServerRule.channel)
-            val salesByHour = paymentStub.getSalesByHour(dateTimeRangeRequest {
-                this.startDateTime = localDateTimeToString(localTime); this.endDateTime = localDateTimeToString(localTime)
-            })
+            val salesByHour = paymentStub.getSalesByHour(
+                dateTimeRangeRequest {
+                    this.startDateTime = localDateTimeToString(localTime)
+                    this.endDateTime = localDateTimeToString(localTime)
+                }
+            )
             val totalSale = salesByHour.getSales(0)
             assertEquals(totalSale.sales.toFloat(), expectedTotalSale.sales)
             assertEquals(totalSale.datetime, localDateTimeToString(expectedTotalSale.datetime))
             assertEquals(totalSale.points, expectedTotalSale.points)
-
         }
     }
 
@@ -87,9 +89,11 @@ class PaymentServiceTest {
                         grpcServerRule.serviceRegistry.addService(paymentService)
 
                         val paymentStub = PaymentGrpcKt.PaymentCoroutineStub(grpcServerRule.channel)
-                        paymentStub.getSalesByHour(dateTimeRangeRequest {
-                            this.startDateTime = request.startDate; this.endDateTime = request.endDate
-                        })
+                        paymentStub.getSalesByHour(
+                            dateTimeRangeRequest {
+                                this.startDateTime = request.startDate; this.endDateTime = request.endDate
+                            }
+                        )
                     }
                 }
             )
@@ -120,9 +124,11 @@ class PaymentServiceTest {
                         grpcServerRule.serviceRegistry.addService(paymentService)
 
                         val paymentStub = PaymentGrpcKt.PaymentCoroutineStub(grpcServerRule.channel)
-                        paymentStub.makePayment(makePaymentRequest {
-                            this.price = request.price; this.datetime = request.dateTime
-                        })
+                        paymentStub.makePayment(
+                            makePaymentRequest {
+                                this.price = request.price; this.datetime = request.dateTime
+                            }
+                        )
                     }
                 }
             )
@@ -154,16 +160,17 @@ class PaymentServiceTest {
                         val paymentService = PaymentService(mockSaleRepo, mockPaymentMethodRepo)
                         grpcServerRule.serviceRegistry.addService(paymentService)
                         val paymentStub = PaymentGrpcKt.PaymentCoroutineStub(grpcServerRule.channel)
-                        paymentStub.makePayment(makePaymentRequest {
-                            this.price = "100.0"; this.datetime = formattedDateTime; this.priceModifier = priceModifier
-                        })
+                        paymentStub.makePayment(
+                            makePaymentRequest {
+                                this.price = "100.0"; this.datetime = formattedDateTime; this.priceModifier = priceModifier
+                            }
+                        )
                     }
                 }
             )
             assertEquals(Status.FAILED_PRECONDITION.code, exception.status.code)
         }
     }
-
 
     @Test
     fun makePayment_success() {
@@ -178,12 +185,14 @@ class PaymentServiceTest {
             val paymentService = PaymentService(mockSaleRepo, mockPaymentMethodRepo)
             grpcServerRule.serviceRegistry.addService(paymentService)
             val paymentStub = PaymentGrpcKt.PaymentCoroutineStub(grpcServerRule.channel)
-            paymentStub.makePayment(makePaymentRequest {
-                this.paymentMethod = ""
-                this.price = "100.0"
-                this.priceModifier = 1.0F
-                this.datetime = formattedDateTime
-            })
+            paymentStub.makePayment(
+                makePaymentRequest {
+                    this.paymentMethod = ""
+                    this.price = "100.0"
+                    this.priceModifier = 1.0F
+                    this.datetime = formattedDateTime
+                }
+            )
         }
     }
 }

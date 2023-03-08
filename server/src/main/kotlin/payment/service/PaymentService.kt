@@ -1,14 +1,11 @@
 package payment.service
 
-import io.grpc.ManagedChannel
 import io.grpc.Status
 import io.grpc.StatusException
 import payment.*
 import payment.dao.PaymentMethodDao
 import payment.dao.SaleDao
 import payment.dto.PaymentMethod
-import payment.repository.PaymentMethodRepo
-import payment.repository.SaleRepo
 import payment.utils.localDateTimeToString
 import payment.utils.stringToLocalDateTime
 import java.time.LocalDateTime
@@ -35,8 +32,6 @@ class PaymentService(saleRepo: SaleDao, paymentMethodRepo: PaymentMethodDao) : P
         // Fetch sales data
         var salesByHourArray = saleRepo.getSalesByHour(startDate, endDate)
         for (salesByHour in salesByHourArray) {
-            var s = salesByHour
-            println(s.sales.toString() + " " + s.datetime.toString())
             sales += totalSales {
                 this.sales = salesByHour.sales.toString()
                 this.datetime = localDateTimeToString(salesByHour.datetime)
