@@ -28,8 +28,7 @@ To run unit tests and output coverage [build/report/kover/html/index.html](/serv
   ```
 
 Or download a gRPC Client such as Ezy and import the proto files at [protos/src/main/proto](protos/src/main/proto/payment/payment.proto):
-
-![Screen Shot 2566-03-09 at 00.06.24.png](..%2F..%2FDesktop%2FScreen%20Shot%202566-03-09%20at%2000.06.24.png)
+<img width="1053" alt="Screen Shot 2566-03-09 at 00 06 24" src="https://user-images.githubusercontent.com/33531627/223808210-6fd55884-ea40-4489-9d23-d6b344241c00.png">
 
 
 
